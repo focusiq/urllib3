@@ -757,6 +757,7 @@ class HTTPResponse(io.IOBase):
             return
         line = self._fp.fp.readline()
         line = line.split(b";", 1)[0]
+        line = (len(line) > 0 and line or b"0")  # added this line
         try:
             self.chunk_left = int(line, 16)
         except ValueError:
